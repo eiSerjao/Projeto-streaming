@@ -14,12 +14,12 @@ export class BrowseComponent {
   // Array que armazenará os filmes populares recebidos da API
   popularMovie:any[]=[]
   
-  // Método executado ao inicializar o componente
+  // Método executado ao inicializar o componente.
   ngOnInit() {
 
-      // Chamando o método `getPopularMovies()` do serviço para obter filmes populares
+      // Chamando o método `getPopularMovies()` do serviço para obter filmes populares.
       this.filmeService.getPopularMovies().subscribe((result:any) => {
-      console.log(result); // Exibe o resultado no console para fins de depuração
+      console.log(result); // Exibe o resultado no console para fins de depuração.
       this.popularMovie=result.results; // Armazena a lista de filmes populares em `popularMovie`
     });
   }
