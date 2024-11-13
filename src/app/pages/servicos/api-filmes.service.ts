@@ -7,21 +7,21 @@ import { tmdbConfig } from '../constants/config';
 })
 export class ApiFilmesService {
 
-  httpService = inject(HttpClient) // Injetei o HttpClient para poder fazer requisições HTTP
+  httpService = inject(HttpClient); // Injeta o HttpClient para requisições HTTP
 
-  getPopularMovies(){ // Criei o método getPopularMovies() para buscar os filmes populares usando uma requisição GET.
-    const headers=this.getHeaders();
-    return this.httpService.get("https://api.themoviedb.org/3/movie/popular",{
-      headers:headers
+  getPopularMovies(page: number = 1) {
+    const headers = this.getHeaders();
+    // Adicionando o parâmetro `language=pt-BR` para retornar os dados em português
+    return this.httpService.get(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=pt-BR`, {
+      headers: headers
     });
-}
-
-  getHeaders(){ // Método para configurar os cabeçalhos da requisição.
-    let headers = new HttpHeaders(); // Criando uma instância dos cabeçalhos.
-    headers = headers.append("accept","application/json"); // Definindo que aceitamos respostas em formato JSON.
-    headers = headers.append("Authorization","Bearer "+tmdbConfig.accessToken) // Adicionando o token de autorização da API.
-    return headers;// Retornando os cabeçalhos configurados.
   }
 
+  getHeaders() {
+    let headers = new HttpHeaders();
+    headers = headers.append("accept", "application/json");
+    headers = headers.append("Authorization", "Bearer " + tmdbConfig.accessToken);
+    return headers;
+  }
 
 }
